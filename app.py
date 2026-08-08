@@ -36,7 +36,7 @@ st.write(
 )
 df = load_expenses()
 # Sidebar
-st.sidebar.header("💰 Budget Settings")
+st.sidebar.header(" Budget Settings")
 
 category_budgets = {}
 
@@ -147,23 +147,23 @@ else:
         predicted_monthly,
         monthly_budget
     )    
-    st.subheader("❤️ Financial Health Score")
-    st.subheader("🚨 Spending Alerts")
+    st.subheader(" Financial Health Score")
+    st.subheader(" Spending Alerts")
     if predicted_monthly is not None:
         if predicted_monthly > monthly_budget:
             st.error(
-                f"⚠️ Warning! Your projected monthly spending "
+                f" Warning! Your projected monthly spending "
                 f"of ₹{predicted_monthly:,.2f} is above your "
                 f"₹{monthly_budget:,.2f} budget."
             )
         elif predicted_monthly > monthly_budget * 0.8:
             st.warning(
-                f"⚠️ You are approaching your monthly budget. "
+                f" You are approaching your monthly budget. "
                 f"Projected spending: ₹{predicted_monthly:,.2f}"
             )
         else:
             st.success(
-                f"✅ Your projected spending of "
+                f" Your projected spending of "
                 f"₹{predicted_monthly:,.2f} is comfortably "
                 f"within your budget."
                 )
@@ -172,18 +172,18 @@ else:
         budget_score = financial_score["budget"]
         concentration_score = financial_score["concentration"]
         st.metric(
-            "❤️ Overall Score",
+            " Overall Score",
             f"{overall_score}/100"
         )
         col1, col2 = st.columns(2)
         with col1:
             st.metric(
-                "💰 Budget Management",
+                " Budget Management",
                 f"{budget_score}/100"
             )
         with col2:
             st.metric(
-                "📊 Spending Distribution",
+                " Spending Distribution",
                 f"{concentration_score}/100"
             )
     else:
@@ -192,16 +192,16 @@ else:
             "your Financial Health Score."
         )
     # Metrics
-    st.subheader("💰 Budget Overview")
+    st.subheader(" Budget Overview")
     if budget_difference is not None:
         if budget_difference > 0:
             st.error(
-                f"⚠️ You may exceed your monthly budget by "
+                f" You may exceed your monthly budget by "
                 f"₹{budget_difference:,.0f}."
             )
         else:
             st.success(
-                f"✅ You are currently projected to stay "
+                f" You are currently projected to stay "
                 f"₹{abs(budget_difference):,.0f} under your budget."
                 )
     else:
@@ -233,7 +233,7 @@ else:
             )
         else:
             st.metric(
-                "📈 Predicted Monthly Spending",
+                " Predicted Monthly Spending",
                 "Need more data"
             )
     
@@ -241,7 +241,7 @@ else:
 
     st.subheader("📋 Your Expenses")
     filter_category = st.selectbox(
-        "🔎 Filter by Category",
+        " Filter by Category",
         ["All"] + sorted(df["category"].dropna().unique().tolist())
         )
     if filter_category == "All":
@@ -255,7 +255,7 @@ else:
         use_container_width=True
     )
     st.download_button(
-        label="📥 Download Expenses as CSV",
+        label="Download Expenses as CSV",
         data=filtered_df.to_csv(index=False),
         file_name="my_expenses.csv",
         mime="text/csv"
@@ -290,7 +290,7 @@ else:
         summary,
         use_container_width=True
     )
-    st.subheader("💰 Category Budget Status")
+    st.subheader(" Category Budget Status")
     for category_name, budget in category_budgets.items():
         if budget > 0 and not df.empty:
             spent = df[
@@ -299,14 +299,14 @@ else:
             remaining = budget - spent
             if remaining < 0:
                 st.error(
-                    f"⚠️ {category_name}: "
+                    f" {category_name}: "
                     f"You are ₹{abs(remaining):,.0f} over budget."
                     )
             else:
                 st.success(
-                    f"✅ {category_name}: "
+                    f" {category_name}: "
                     f"₹{remaining:,.0f} remaining."
             )
-    st.subheader("💡 Smart Financial Insights")
+    st.subheader(" Smart Financial Insights")
     for insight in insights:
         st.info(insight)
